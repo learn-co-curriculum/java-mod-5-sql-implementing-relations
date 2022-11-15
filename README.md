@@ -2,7 +2,7 @@
 
 ## Learning Goals
 
-- Implement a one-to-many relationship using an FOREIGN KEY constraint.
+- Implement a one-to-many relationship using a FOREIGN KEY constraint.
 - Implement a many-to-many relationship using FOREIGN KEY constraints along with a composite PRIMARY KEY constraint.
 - Implement a many-to-many relationship using FOREIGN KEY constraints, a single column PRIMARY KEY constraint, and
   a composite UNIQUE constraint.
@@ -84,9 +84,9 @@ CREATE TABLE employee (
 The foreign key forces the database to check that each value in
 the `department_id` column corresponds to a value in the `id` column
 of the `department` table.  Thus, the following statement would
-result in a foreign key constrain violation as the `department` table
+result in a foreign key constraint violation as the `department` table
 does not contain a row with `id` 10.  The DBMS would prevent the row
-from being inserted:
+from being inserted: 
 
 ```SQL
 INSERT INTO employee (id, first_name, last_name, salary, department_id)
