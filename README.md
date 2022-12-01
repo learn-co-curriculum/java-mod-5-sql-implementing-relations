@@ -21,24 +21,14 @@ In this lesson, we use SQL to implement the various relationships between tables
 We will see how to use SQL to implement the one-to-many relationship between `employee` and `department`.
 Recall our sample data:
 
-<table>
-<tr>
-<th>department</th>
-<th>employee</th>
-</tr>
-
-<tr>
-
-<td>
+#### Department table
 
 | id  | name      | location   |
 |-----|-----------|------------|
 | 1   | Payroll   | Building A |
 | 2   | Marketing | Building B |
 
-</td>
-
-<td>
+### Employee table
 
 | id  | first_name | last_name  | salary | department_id |
 |-----|------------|------------|--------|---------------|
@@ -48,11 +38,6 @@ Recall our sample data:
 | 4   | Tal        | Oak        | 88000  | 1             |
 | 5   | Yuri       | Birch      | 150000 | 1             |
 
-</td>
-
-
-</tr>
-</table>
 
 - The  `department_id` column stores a single integer, thus each employee works in one department.
 - The `department_id` column is **not** unique. Multiple rows in the `employee` table may have the same value in the `department_id` column,
@@ -135,15 +120,7 @@ Recall our sample data:
 
 ![author book ERD](https://curriculum-content.s3.amazonaws.com/6036/introduction-to-table-relations/author_book_erd.png)
 
-<table>
-<tr>
-<th>Book table</th>
-<th>Author table</th>
-</tr>
-
-<tr>
-
-<td>
+#### Book table
 
 | id  | title                            | year | ISBN           |
 |-----|----------------------------------|------|----------------|
@@ -151,9 +128,7 @@ Recall our sample data:
 | 2   | The Unix Programming Environment | 1983 | 978-0139376818 |
 | 3   | Unix, A History and Memoir       | 2019 | 978-1695978553 |
 
-</td>
-
-<td>
+#### Author table
 
 | id  | author              |
 |-----|---------------------|
@@ -161,28 +136,13 @@ Recall our sample data:
 | 2   | Dennis M. Ritchie   |
 | 3   | Rob Pike            | 
 
-</td>
-</tr>
-</table>
-
 
 There are two basic techniques for designing a primary key for many-to-many relationships.
 
-<table>
-<tr>
-<th>Technique #1</th>
-<th>Technique #2</th>
-</tr>
+#### Technique #1 - Composite primary key (book_id, author_id)
 
-<tr>
-<td>Composite primary key (book_id, author_id) </td>
-<td>Primary key (id).  Unique constraint (book_id, author_id) </td>
-</tr>
+For technique #1, the two columns `book_id` and `author_id` together form the primary key.
 
-<tr>
-
-<td>
- 
 | book_id | author_id |
 |---------|-----------|
 | 1       | 1         |
@@ -191,10 +151,10 @@ There are two basic techniques for designing a primary key for many-to-many rela
 | 2       | 3         |
 | 3       | 1         |
 
-</td>
+#### Technique #2 - Primary key (id).  Unique constraint (book_id, author_id)
 
-<td>
-
+For technique #2, we use an additional `id` column for the primary key, and add a
+constraint that no two rows can contain the same combination of `book_id` and `author_id`.
 
 | id  | book_id | author_id  |
 |-----|---------|------------|
@@ -204,17 +164,6 @@ There are two basic techniques for designing a primary key for many-to-many rela
 | 4   | 2       | 3          |
 | 5   | 3       | 1          |
 
-
-</td>
-
-</tr>
-
-</table>
-
-For technique #1, the two columns `book_id` and `author_id` together form the primary key.
-
-For technique #2, we use an additional `id` column for the primary key, and add a 
-constraint that no two rows can contain the same combination of `book_id` and `author_id`.
 
 ## Implementing Many-To-Many Relationships in SQL
 
