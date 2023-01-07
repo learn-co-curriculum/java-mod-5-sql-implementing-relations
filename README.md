@@ -8,7 +8,6 @@
   a composite UNIQUE constraint.
 - Implement a one-to-one relationship using a FOREIGN KEY and a UNIQUE constraint.
 
-
 ## Introduction
 
 In this lesson, we use SQL to implement the various relationships between tables.
@@ -18,10 +17,17 @@ In this lesson, we use SQL to implement the various relationships between tables
 ![employee department ERD](https://curriculum-content.s3.amazonaws.com/6036/introduction-to-table-relations/dept_emp_erd.png
 )
 
-We will see how to use SQL to implement the one-to-many relationship between `employee` and `department`.
+We implement a one-to-many relationship by adding a **foreign key** column
+in the table on the "many" side of the relationship that stores a value
+representing the primary key of the table on the "one" side.
+
+In the one-to-many relationship between `department` and `employee`, the `employee`
+entity is on the "many" side of the relationship.  Thus, we add a foreign key `department_id`
+to the `Employee` table that references the primary key of the `Department` table.
+
 Recall our sample data:
 
-#### Department table
+### Department table
 
 | id  | name      | location   |
 |-----|-----------|------------|
@@ -39,11 +45,12 @@ Recall our sample data:
 | 5   | Yuri       | Birch      | 150000 | 1             |
 
 
+
 - The  `department_id` column stores a single integer, thus each employee works in one department.
 - The `department_id` column is **not** unique. Multiple rows in the `employee` table may have the same value in the `department_id` column,
   thus a department may have multiple employees.
 
-We implement the relationship using a `FOREIGN KEY` constraint on the `department_id` column in the `employee` table:
+We implement the relationship in SQL using a `FOREIGN KEY` constraint on the `department_id` column in the `employee` table:
 
 ```sql
 DROP TABLE IF EXISTS department CASCADE;
