@@ -122,7 +122,7 @@ ALTER TABLE employee ADD FOREIGN KEY (department_id) REFERENCES department (id);
 
 ## Many-To-Many Relationships
 
-We will see how to use SQL to implement the one-to-many relationship between `employee` and `department`.
+We will see how to use SQL to implement the many-to-many relationship between `book` and `author`.
 Recall our sample data:
 
 ![author book ERD](https://curriculum-content.s3.amazonaws.com/6036/introduction-to-table-relations/author_book_erd.png)
